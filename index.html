@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EYESHOT POSKit 系統 - 方案與價格</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FAFAFC;
+            --card-bg: #FFFFFF;
+            --text-main: #18181B;
+            --text-sub: #71717A;
+            --border-color: #E4E4E7;
+            --primary: #0F172A;
+            --accent: #2E7D32;
+            --accent-bg: #F0FDF4;
+            --header-height: 60px; /* 頂部導覽列高度 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* 關鍵修正：全域設定滾動補償高度 (計算：導覽列高度 + 表頭高度 + 分類列高度 + 額外留白) */
+        html {
+            scroll-padding-top: 80px; 
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* 頂部 fixed 導覽列 */
+        header {
+            position: sticky;
+            top: 0;
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .brand img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* 頁首 Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+        }
+
+        /* 價格卡片區 */
+        .pricing-section {
+            max-width: 1000px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--accent);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            right: 2rem;
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 1.5rem;
+            min-height: 42px;
+        }
+
+        .price-box {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .price-val {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-sub {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        .card-feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .card-feature-list li {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-feature-list li::before {
+            content: "✓";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .card-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .price-card.featured .card-btn {
+            background: var(--accent);
+        }
+
+        /* 附加費用說明區 */
+        .fees-container {
+            max-width: 1000px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .fees-box {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .fees-box h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .fees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .fee-item {
+            background: var(--bg-color);
+            padding: 1.2rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .fee-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            color: var(--primary);
+        }
+
+        .fee-item p {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* 
+           ======= folk.app 風格：全頁面主體原生 Sticky 方案功能比較表 ======= 
+        */
+        .table-section {
+            max-width: 1000px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+        }
+
+        .main-comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: transparent;
+        }
+
+        .main-comparison-table th,
+        .main-comparison-table td {
+            padding: 1.1rem 1.25rem;
+            font-size: 0.92rem;
+            border-bottom: 1px solid var(--border-color);
+            background: #FFFFFF;
+        }
+
+        /* 第一層 Sticky：表頭定著在導覽列下方 */
+        .main-comparison-table thead th {
+            position: sticky;
+            top: var(--header-height);
+            background: #FFFFFF;
+            color: var(--primary);
+            font-size: 1.05rem;
+            font-weight: 700;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* 第二層 Sticky：模組分類標題列 */
+        .cate-row td {
+            position: sticky;
+            top: calc(var(--header-height) + 53px);
+            background: #F4F4F5 !important;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--accent);
+            z-index: 90;
+            border-top: 1px solid var(--border-color);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .col-feature { width: 50%; }
+        .col-plan { width: 25%; text-align: center; }
+
+        .yes { color: var(--accent); font-weight: bold; font-size: 1.1rem; }
+        .no { color: #D4D4D8; }
+
+        /* 功能樸實詳述區 */
+        .details-section {
+            max-width: 1000px;
+            margin: 0 auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        .detail-group {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-group h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            margin-bottom: 1rem;
+        }
+
+        .detail-item:last-child { margin-bottom: 0; }
+
+        .detail-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        .detail-desc {
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            margin-top: 0.2rem;
+        }
+
+        footer {
+            background: #18181B;
+            color: #A1A1AA;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            font-size: 0.85rem;
+        }
+        .detailps {
+            font-size: 0.7rem;
+            color: var(--text-sub);
+            line-height:1;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .col-feature { width: 40%; }
+            .col-plan { width: 30%; }
+            .main-comparison-table th, .main-comparison-table td { padding: 0.8rem 0.5rem; font-size: 0.85rem; }
+            .nav-links{display:none}
+            .nav-btn{display:block !important}
+        }
+.nav-btn:active {
+  transform: scale(0.97); 
+}
+#navList .nav-links{display:block !important}
+.d-none{display:none !important}
+    </style>
+</head>
+<script>
+window.onload=function(){
+	var navLinks=document.querySelector('.nav-links');
+	var clonedElement=navLinks.cloneNode(true);
+	document.querySelector('#navList').appendChild(clonedElement);
+}
+window.onresize=function(){
+	document.querySelector('#navList').classList.add('d-none');
+}
+window.onscroll=function(){
+	var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+	var scrollToTopBtn = document.getElementById('scrollToTop');
+	
+	if (scrollTop >= 300) {
+	    scrollToTopBtn.style.display = 'block'; // 或 'inline'，依您原本的 CSS 決定
+	} else {
+	    scrollToTopBtn.style.display = 'none';
+	}
+}
+function fnScrollToTop(){
+  window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 平滑捲動效果（若想要瞬間上去，改成 'auto'）
+    });
+}
+</script>
+<body>
+
+    <!-- 頂部 Fixed 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand">
+                <img src="logo.png" alt="Logo"> 餐飲 POSKit
+            </a>
+            <ul class="nav-links">
+                <li><a href="#pricing">方案價格</a></li>
+                <li><a href="#comparison">功能比較</a></li>
+                <li><a href="#equipmentNeeds">設備需求</a></li>
+                <li><a href="#fees">設定與維護</a></li>
+                <li><a href="#details">問與答</a></li>
+                <li><a href="#authps">授權與服務</a></li>
+            </ul>
+            <div class="nav-btn" onclick="document.querySelector('#navList').classList.toggle('d-none');" style="display:none;cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+</svg></div>
+        </div>
+    </header>
+<div id=navList class=d-none onclick="this.classList.toggle('d-none');" style="border:1px solid;display:inline-block;position:fixed;top:50px;right:20px;z-index:1001;background:#fdfdfd;border-radius:5px;padding:10px 20px">
+</div>
+    <!-- 頁首 Hero -->
+    <section class="hero">
+    		<h1>全方位餐飲 POS 系統</h1>
+        <h2>省人力、防超賣、精準出餐!! </h2>
+        <p>以第一線餐飲從業人員真實需求開發，解決痛點，沒有花俏、累贅功能。本地端設置資料庫，營業資料免上傳，外部斷網也能用。設備相容性高，舊設備也可用。</p>
+    </section>
+
+    <!-- 價格卡片區 -->
+    <section class="pricing-section" id="pricing">
+        <div class="pricing-grid">
+            
+            <!-- 基礎版 -->
+            <div class="price-card">
+                <div class="card-title">基礎版</div>
+                <div class="card-desc">適合預算有限、希望導入 POS 與基本手機點餐流程的初創或小型餐飲店。</div>
+                <div class="price-box">
+                    <div class="price-val">永久免授權費</div>
+                    <div class="price-sub">(新設置可享免費體驗完整版功能30天)</div>
+                </div>
+                <ul class="card-feature-list">
+                    <li>聯動防火牆防護設置</li>
+                    <li>POS 櫃台點餐基本功能</li>
+                    <li>顧客顯示螢幕基本功能</li>
+                    <li>廚房顯示系統基本功能</li>
+                    <li>輪播菜單基本功能</li>
+                    <li>手機點餐基本功能</li>
+                </ul>
+                <div class="price-sub">基礎版免收軟體授權使用費。首次安裝與初始化設定費為 $6,000，硬體及額外技術支援另計。基礎版提供安裝時程式版本之現況功能；後續功能更新、版本升級、錯誤修正及安全性更新不包含在內。</div>
+            		<div class="price-sub" style="margin:10px 0 0 0">**會於部分裝置畫面置入小幅文字跑馬燈推廣廣告**</div>
+            </div>
+
+            <!-- 完整版 -->
+            <div class="price-card featured">
+                <span class="popular-badge">全功能推薦</span>
+                <div class="card-title">完整版</div>
+                <div class="card-desc">適合來客流量較高之餐飲店，需完整系統輔助，充分發揮人手協作，精準快速出餐，進而節省人力成本。</div>
+                <div class="price-box">
+                    <div class="price-val"><font style=color:orange>$1,200</font> <span style="font-size:1rem; font-weight:normal; color:var(--text-sub);">/ 月</span></div>
+                    <div class="price-sub">牌價 $2,000／月；目前優惠價 $1,200／月。優惠適用條件與續約方式請見下方說明。</div>
+                </div>
+                <ul class="card-feature-list">
+                    <li>聯動防火牆防護設置</li>
+                    <li>POS 櫃台點餐完整功能</li>
+                    <li>顧客顯示螢幕完整功能</li>
+                    <li>廚房顯示系統完整功能</li>
+                    <li>輪播菜單與廣告完整功能</li>
+                    <li>自助點餐機(Kiosk)功能</li>
+                    <li>手機點餐完整功能</li>
+                    <li>預約點餐</li>
+                    <li>限制數量/完售即時控管</li>
+                    <li>行動支付自動串接</li>
+                </ul>
+                <div class="price-sub">軟體授權費與後續更新、修正及額外技術支援分開計費；詳細服務項目與費率請見下方說明。</div>
+                <div class="price-sub" style="margin:10px 0 0 0">**優惠價方案部分裝置畫面會顯示小幅文字跑馬燈，用於推廣本系統；依牌價取得授權可移除**</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 方案功能比較表 -->
+    <section class="table-section" id="comparison">
+        <div class="section-header">方案功能詳細對照表</div>
+        
+        <table class="main-comparison-table">
+            <thead>
+                <tr>
+                    <th class="col-feature">功能項目</th>
+                    <th class="col-plan">基礎版</th>
+                    <th class="col-plan">完整版</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="cate-row"><td colspan="3">一、 安全防護</td></tr>
+                <tr><td>聯動防火牆防護設置<div class=detailps>系統判定外部連線異常時，可聯動防火牆封鎖來源 IP，以降低外部異常流量影響內網的風險</div></td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+
+                <tr class="cate-row"><td colspan="3">二、 POS 櫃台結帳系統</td></tr>
+                <tr><td>基本點餐功能</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>自訂品項並指定出單機、標籤機列印</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>行動支付註記(非串接)</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>品項銷售時可即時加價或減價</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>限制數量或完售即時控管(餐點、食材、調整項目)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>桌位自動關閉、快速控制</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>特殊設定管理<div class=detailps>可依時間、時段、訂單類別、設備種類設置餐點、調整項目、優惠規則等之個別設定</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>線上點餐開關即時控管<div class=detailps>包含自助點餐及手機點餐</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>列印點餐條碼</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>產品活動優惠設定</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>群組訂單(合併結帳)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>來電號碼匯入(需選購外接盒)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>基礎版 POS 設備數量</td><td class="col-plan yes">✓<div class=detailps>限1台</div></td><td class="col-plan no">-</td></tr>
+                <tr><td>多分店共用系統</td><td class="col-plan no">-</td><td class="col-plan yes">✓<div class=detailps>需額外授權</div></td></tr>
+
+
+                <tr class="cate-row"><td colspan="3">三、 顧客顯示螢幕 (客顯副屏)</td></tr>
+                <tr><td>顧客顯示螢幕基本功能</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>完售品項自動顯示(顧客顯示螢幕)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>顧客顯示螢幕輪播廣告菜單</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>顯示點餐條碼<div class=detailps>可依設定更新限時條碼，逾期後失效，降低惡意下單風險</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>售完品項聯動顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+
+                <tr class="cate-row"><td colspan="3">四、 KDS 廚房顯示系統</td></tr>
+                <tr><td>訂單餐點顯示</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>餐點完成狀態註記</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>訂單餐點分流顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>餐點完成狀態註記(分區代號)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>群組訂單(合併顯示)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>訂單已經過時間顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>限制數量或完售即時控管(餐點、食材、調整項目)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>桌位快速控制</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>直接送餐註記</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>餐點顯示名稱替換設定</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>基礎版 KDS 設備數量</td><td class="col-plan yes">✓<div class=detailps>限2台</div></td><td class="col-plan no">-</td></tr>
+                
+                
+                
+
+                <tr class="cate-row"><td colspan="3">五、 輪播廣告機</td></tr>
+                <tr><td>輪播餐點菜單</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>輪播廣告</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>顯示點餐條碼<div class=detailps>可依設定更新限時條碼，逾期後失效，降低惡意下單風險</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>售完品項聯動顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>基礎版輪播設備數量</td><td class="col-plan yes">✓<div class=detailps>限1台</div></td><td class="col-plan no">-</td></tr>
+
+                <tr class="cate-row"><td colspan="3">六、 自助點餐機 (Kiosk)</td></tr>
+                <tr><td>基本點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>滿單管控<div class=detailps>可以時間、時段設置訂單滿單總額，當該單位時間內未製餐之訂單(餐點)達到滿單金額，則限制新訂單送出</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+
+                <tr class="cate-row"><td colspan="3">七、 手機點餐 (線上)</td></tr>
+                <tr><td>基本點餐功能</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>掃描條碼點餐(QR Code)<div class=detailps>支援無時效條碼、限時條碼及即時產生之條碼</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>滿單管控<div class=detailps>可以時間、時段設置訂單滿單總額，當該單位時間內未製餐之訂單(餐點)達到滿單金額，則限制新訂單送出</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>會員登入(可 LINE Login)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>會員手機簡訊認證<div class=detailps>可設置需登入會員才能點餐，降低惡意下單風險</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+            		<tr class="cate-row"><td colspan="3">八、 其他</td></tr>
+            		<tr><td>跑馬燈廣告<div class=detailps>會於顧客顯示螢幕、輪播廣告機、自助點餐機下方置入小幅跑馬燈文字廣告推廣本系統，不影響既有功能與顯示</div></td><td class="col-plan yes">✓</td><td class="col-plan yes">✓<div class=detailps>如以牌價取得授權，可移除跑馬燈</div></td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 設備需求 -->
+    <section class="fees-container" id="equipmentNeeds">
+        <div class="fees-box">
+            <h3>⌨ 設備需求</h3>
+            <p style="font-size:0.9rem; color:var(--text-sub);">除本頁標示的必要設備外，終端設備不限定特定品牌，但須符合系統規格並先確認相容性。硬體費用不包含在軟體授權費或首次初始化設定費內，由店家自行準備、採購，或委託代購。</p>
+  					<div style="margin:10px 2rem">
+	  					<li>小型伺服器(必備)</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">供本系統核心運作，依不同等級需求，價格約 10,000 ~ 30,000 元</p>
+	            <li>RouterOS 路由器(必備)</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">提供防火牆與網路隔離功能，依不同等級需求，價格約 1,500 ~ 5,000 元</p>
+	            <li>Windows 電腦(必備，可用相容舊設備；符合條件時可用平板替代)</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">作為櫃台點餐機使用，一般文書機或迷你電腦即可，須安裝合法授權的 Windows 系統，價格約 $9,000 起。如不需外接收銀箱，不需列印標籤或明細，不需接顧客顯示螢幕，也不需匯入來電號碼，可評估以相容平板替代。</p>
+							<li>觸控螢幕(依櫃台配置需要)</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">供櫃台點餐機操作，依尺寸不同約 $3,000 起；如使用觸控一體機或平板，可能不需另購。</p>
+            	<li>觸控平板(選配，可用相容舊設備)</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">可作為廚房顯示器或自助點餐機(kiosk)，依不同尺寸最低價格約 6,000 元起</p>
+							<li>電視或顯示器（選配，可用相容舊設備）</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">可作為輪播菜單／廣告顯示設備；Android 電視約 $8,000 起。舊電視若不支援所需功能，可評估搭配電視盒。</p>
+							<li>出單機、標籤機（依列印需求選配）</li>
+	            <p style="font-size:0.9rem; color:var(--text-sub);">用於列印明細、標籤及廚房分區單據，依規格約 $2,500 起；系統可依設定將不同品項送至指定設備。</p>
+            	<br><p style="font-size:0.9rem; color:red;">以上僅列主要設備，來電匯入、掃碼等延伸功能可能需要額外設備。價格為 2026 年 9 月查詢的參考價，實際價格以採購時為準。舊設備是否可用須依規格、相容性及設備狀況確認；如需檢測或技術支援，依公告費率另行計費。</p>
+        		</div>
+            <h3>✦ 設備搭配舉例</h3>
+  					<div style="margin:10px 2rem">
+        			<h4>最小運作模式：POS點餐+廚房列印+手機點餐</h4>
+        			<p style="font-size:0.9rem; color:var(--text-sub);">小型伺服器*1<br>RouterOS 路由器*1<br>電腦(Windows系統)*1<br>觸控螢幕*1<br>出單機*2(廚房分區)</p>
+        		</div>
+  					<div style="margin:10px 2rem">
+        			<h4>推薦運作模式：POS點餐+廚房顯示+自助點餐(kiosk)+輪播菜單(廣告)+手機點餐</h4>
+        			<p style="font-size:0.9rem; color:var(--text-sub);">小型伺服器*1<br>RouterOS 路由器*1<br>電腦(Windows系統)*1<br>觸控螢幕*1<br>一般螢幕*1(顧客顯示螢幕)<br>平板*1(控餐)<br>平板*2(廚房分區)<br>平板*1(自助點餐)<br>電視*1(輪播菜單)</p>
+        		</div>
+        </div>
+    </section>
+
+    <!-- 首次設定與維護費說明 -->
+    <section class="fees-container" id="fees">
+        <div class="fees-box">
+            <h3>🛠️ 首次設定、人工維護與車馬費標準</h3>
+            <p style="font-size:0.9rem; color:var(--text-sub);">本頁方案價格為軟體授權使用費；首次初始化設定、硬體、額外技術支援、更新及錯誤修正服務分開計費。以下為目前公告費率，實際服務範圍以雙方確認內容為準。</p>
+            <div class="fees-grid">
+                <div class="fee-item">
+                    <h4>第一次初始化設定費</h4>
+                    <p>$6,000 (一次性費用)<br>(遠途依距離另收車馬費)</p>
+                </div>
+                <div class="fee-item">
+                    <h4>人工維護與遠端支援</h4>
+                    <p>線上諮詢或遠端協助：$500 / 小時<br>(未滿1小時以1小時計)<br><br>現場人工技術支援：$2,000 / 次<br>(每次現場技術支援以2小時為限，超過部分，每小時加收 $1,000 元，未滿1小時以1小時計)</p>
+                </div>
+                <div class="fee-item">
+                    <h4>工程師現場車馬費</h4>
+                    <p>台中市沙鹿區、龍井區免收車馬費<br><br>其他地區依實際來回距離計算<br>每公里 $20 元，最低收取 $300 元車馬費</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 問與答 -->
+    <section class="details-section" id="details">
+        <div class="section-header">常見問題與解答 (FAQ)</div>
+
+        <div class="detail-group">
+            <h3>一、 系統架構與斷網穩定性</h3>
+            <div class="detail-item">
+                <div class="detail-title">外部網路中斷時，系統還能使用嗎？</div>
+                <div class="detail-desc">本系統採用店內本地端主機架構。在店內區域網路與相關設備正常的情況下，POS、KDS、自助點餐機、輪播廣告機等店內功能可於外部網路中斷時繼續運作。手機遠端點餐、第三方登入、簡訊認證、線上支付及需要外部連線的服務，則可能受到影響。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">為什麼一定要安裝 RouterOS 路由器來提供防火牆防護？</div>
+                <div class="detail-desc">RouterOS 路由器可提供防火牆規則與區域網路隔離，並與系統的異常連線判斷機制配合，協助降低外部異常連線對店內系統的影響。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">營業資料會存在哪裡？會不會傳給第三方或用於 AI 訓練？</div>
+                <div class="detail-desc">系統主要營業資料庫設置於店內小型伺服器，讓店家能自行掌握店內資料。若使用 LINE Login、簡訊認證或行動支付等第三方服務，相關服務仍會依其運作方式處理必要資料。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">店裡本來就有舊電腦、舊平板或舊出單機，可以直接沿用嗎？</div>
+                <div class="detail-desc">大部分舊設備可能可以沿用，但須先確認作業系統、瀏覽器、解析度、網路與列印介面等規格是否相容。舊設備的效能、壽命及穩定性由設備本身狀況決定；必要時需另行檢測，相關技術支援依本頁費率計費。</div>
+            </div>
+        </div>
+
+        <div class="detail-group">
+            <h3>二、 方案選擇與費用說明</h3>
+            <div class="detail-item">
+                <div class="detail-title">為什麼能提供實惠的價格？</div>
+                <div class="detail-desc">本系統是由第一線餐飲人員實際參與規劃開發，專注實際餐飲營運需求，採用店內本地端架構，並以模組化功能及彈性設備配置，降低小型餐飲店的導入門檻。我們沒有花俏的廣告行銷費用，希望讓店家以合理成本，逐步建立整合式點餐與出餐流程，把好的系統分享給更多餐飲業的夥伴使用。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">基礎版真的可以「永久免費」嗎？有沒有隱藏陷阱？</div>
+                <div class="detail-desc">基礎版免收軟體授權使用費，新設置店家可免費體驗完整版功能 30 天。首次初始化設定費為 $6,000，硬體及額外技術支援另計；後續更新、錯誤修正與安全性更新不包含在基礎版授權費內。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">新設置的「第一次初始化設定費 $6,000」包含哪些項目？</div>
+                <div class="detail-desc">包含初次伺服器架設、防火牆基本設定、已約定設備的連線與功能聯動設定，以及店員基本操作教學。$6,000 為初始化服務費，不包含伺服器、路由器、電腦、螢幕、印表機等硬體費用；若需額外設備、超出約定範圍的設定或遠距車馬費，另行報價。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">完整版目前優惠價 $1,200／月，續約價格如何計算？</div>
+                <div class="detail-desc">已取得 $1,200／月優惠價的店家，於授權到期前至少一個月完成年約續約，即可依相同優惠單價續約。按此價格計算，年約為 $14,400。第三方支付或簡訊服務商若另有服務費，依其規定辦理。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">如果一開始用基礎版，之後生意變好了想升級成完整版會很麻煩嗎？</div>
+                <div class="detail-desc">完全不麻煩！當您的店鋪來客量增加、需要解鎖多台裝置協作、KDS 廚房分流、完售即時控管或行動支付串接時，隨時可以聯繫我們開通完整版功能(如需現場技術支援設置設備，將依上列人工維護與遠端支援額外收費)。</div>
+            </div>
+						<div class="detail-item">
+						    <div class="detail-title">目前有店家實際在使用嗎？</div>
+						    <div class="detail-desc">有的。目前有 1 家示範店以完整版實際營運，已在門市情境中使用 POS、KDS、手機點餐、自助點餐與完售控管等功能。不同店家的設備、網路與作業流程仍可能造成使用差異；歡迎預約參觀示範店或安排遠端展示，並在導入前確認自身需求與設備相容性。</div>
+						</div>
+        </div>
+
+        <div class="detail-group">
+            <h3>三、 點餐、廚房與營運管理</h3>
+            <div class="detail-item">
+                <div class="detail-title">基礎版的設備數量有限制嗎？</div>
+                <div class="detail-desc">有的。基礎版的 POS 櫃台、輪播廣告機各為「限 1 台」，廚房 KDS為「限 2 台」；若您的店面較大、需要多台設備同時協同作業，則建議直接選擇完整版。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">如果某些食材或餐點賣完了，怎麼防止客人在手機或自助機一直點到？</div>
+                <div class="detail-desc">完整版具備「限制數量或完售即時控管」功能。當您在 POS 或 KDS 按下一鍵完售或設定數量歸零時，自助點餐機（Kiosk）會即時同步完售狀態(手機點餐於新訂單送出時會阻擋內含已完售品項之訂單)，降低超賣風險。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">手機掃碼點餐（QR Code）安全嗎？會不會被外面的惡意人士亂點？</div>
+                <div class="detail-desc">完整版支援「依設定產生的限時動態條碼」以及「會員手機簡訊認證」，可降低惡意下單或假訂單風險。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">廚房顯示系統（KDS）可以把冷飲、炸物、熱炒分流到不同的工作站螢幕嗎？</div>
+                <div class="detail-desc">可以！完整版支援「訂單餐點分流顯示」，例如飲料單自動送到吧檯螢幕、炸物送到炸台、熱炒送到爐口，讓內場分工更精準，有助於降低人工分流錯誤與漏單風險。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">什麼是「滿單管控」？對廚房有什麼幫助？</div>
+                <div class="detail-desc">您可以依時段設定尚未完成製作的訂單金額上限。達到設定門檻時，系統會依功能設定暫停接收新的手機或自助點餐訂單，協助控制接單量。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">行動支付（如 Line Pay、台灣 Pay 等）是直接自動扣款，還是要人工手動對帳？</div>
+                <div class="detail-desc">完整版支援「行動支付串接」，在支付服務商串接、商家帳戶與網路均正常的情況下，系統可依串接結果更新付款狀態；若使用基礎版則提供「行動支付註記（非串接）」功能供櫃台手動歸類營收。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">客人打電話來外帶時，POS 系統可以帶入電話號碼嗎？</div>
+                <div class="detail-desc">可以支援！系統具備「來電號碼匯入功能」（需另外選購外接電話盒），當客打電話進來時，輸入點餐資料時，可一併帶入電話號碼及把電話末3碼當作取餐號。</div>
+            </div>
+        </div>
+
+        <div class="detail-group">
+            <h3>四、 設備採購、售後維護與車馬費</h3>
+            <div class="detail-item">
+                <div class="detail-title">系統提到的硬體設備（如小型伺服器、路由器、電腦、平板），一定要向你們買嗎？</div>
+                <div class="detail-desc">不一定要跟我們買。這些硬體設備是您的自有資產，您可以自行購買規格相符的設備，或利用舊設備替代，我們也提供「委託代購」的便利服務。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">只有「沙鹿區」和「龍井區」免收車馬費嗎？其他地方怎麼算？</div>
+                <div class="detail-desc">沙鹿區與龍井區免收車馬費。其他地區依實際來回距離計算，每公里 $20，最低收取 $300。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">如果店裡操作遇到突發狀況，遠端支援是怎麼收費的？</div>
+                <div class="detail-desc">線上諮詢或遠端協助為 $500／小時，未滿 1 小時以 1 小時計。是否能遠端處理及所需時間，需依故障原因、網路連線與設備狀況判斷。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">如果狀況比較嚴重、需要工程師親自到店裡支援怎麼收費？</div>
+                <div class="detail-desc">現場人工技術支援為 $2,000 / 次（每次以 2 小時為限）。若超過 2 小時，超出部分每小時加收 $1,000（未滿 1 小時以 1 小時計，另視地區加收車馬費）。</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">如果是因為店員不小心把網路線拔掉或自己亂改設定導致故障，這需要收費嗎？</div>
+                <div class="detail-desc">這屬於外在環境或人為誤觸所致。遠端協助費用為 $500／小時，未滿 1 小時以 1 小時計。實際處理時間依故障原因、設備狀況及可連線程度而異。</div>
+            </div>
+        </div>
+    </section>
+     <section class="details-section" id="authps">
+        <div class="section-header">授權與服務範圍特別說明</div>
+
+        <div class="detail-group">
+        	                <ul>
+<li>軟體授權費與技術支援分開計算。後續功能更新、版本升級、錯誤修正、安全性更新、遠端協助、到店服務及客製開發，依本頁公告費率或個別報價計費。</li>
+
+<li>系統採用店內本地端架構，並提供防火牆聯動等防護功能，協助店家管理營運流程及降低外部異常連線的影響。實際使用情況仍會受到店內網路、設備及第三方服務狀態影響。</li>
+
+<li>完整授權內容與雙方服務約定，將於正式合作時另行確認。</li>
+</ul>
+        </div>
+        </section>
+    <!-- 頁尾 -->
+    <footer id="contact">
+        <p>&copy; 2026 EYESHOT 數位工作室 餐飲 POSKit 版權所有</p>
+        <p><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
+  <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0M5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.15.15 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157m.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832l-.013-.015v-.001l-.01-.01-.003-.003-.011-.009h-.001L7.88 4.79l-.003-.002-.005-.003-.008-.005h-.002l-.003-.002-.01-.004-.004-.002-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.2.2 0 0 0 .039.038l.001.001.01.006.004.002.008.004.007.003.005.002.01.003h.003a.2.2 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.16.16 0 0 0-.108.044h-.001l-.001.002-.002.003a.16.16 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.16.16 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
+</svg> 官方帳號：<a href="https://lin.ee/vhiPlk9" style="color:#A1A1AA">@920skhrf</a></p>
+    </footer>
+<div id=scrollToTop class="shadow" style="display:none;width:40px;height:40px;position:fixed;right:0;z-index:1031;bottom:70px;background:rgba(255,255,255,0.7);margin:10px;border-radius:50rem;color:#dc3545;cursor: pointer;box-shadow:0 0.5rem 1rem rgba(0, 0, 0, 0.15)" onclick=fnScrollToTop()><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chevron-bar-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M3.646 11.854a.5.5 0 0 0 .708 0L8 8.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708M2.4 5.2c0 .22.18.4.4.4h10.4a.4.4 0 0 0 0-.8H2.8a.4.4 0 0 0-.4.4"/>
+</svg></div>
+</body>
+</html>
