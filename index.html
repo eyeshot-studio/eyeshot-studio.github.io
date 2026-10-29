@@ -504,7 +504,7 @@ function fnScrollToTop(){
                     <li>自助點餐機(Kiosk)功能</li>
                     <li>手機點餐完整功能</li>
                     <li>預約點餐</li>
-                    <li>限制數量/完售即時控管</li>
+                    <li>即時庫存控管(餐點、食材、調整項目)，避免超賣</li>
                     <li>行動支付自動串接</li>
                 </ul>
                 <div class="price-sub">軟體授權費與後續更新、修正及額外技術支援分開計費；詳細服務項目與費率請見下方說明。</div>
@@ -536,7 +536,7 @@ function fnScrollToTop(){
                 <tr><td>行動支付註記(非串接)</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>品項銷售時可即時加價或減價</td><td class="col-plan yes">✓</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
-                <tr><td>限制數量或完售即時控管(餐點、食材、調整項目)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>即時庫存控管(餐點、食材、調整項目)，避免超賣<div class=detailps>透過資料庫鎖定與交易機制，控管多筆訂單同時異動時的庫存數量，避免超出可供應數量。</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>桌位自動關閉、快速控制</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>特殊設定管理<div class=detailps>可依時間、時段、訂單類別、設備種類設置餐點、調整項目、優惠規則等之個別設定</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
@@ -563,7 +563,7 @@ function fnScrollToTop(){
                 <tr><td>餐點完成狀態註記(分區代號)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>群組訂單(合併顯示)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>訂單已經過時間顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
-                <tr><td>限制數量或完售即時控管(餐點、食材、調整項目)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>即時庫存控管(餐點、食材、調整項目)，避免超賣<div class=detailps>透過資料庫鎖定與交易機制，控管多筆訂單同時異動時的庫存數量，避免超出可供應數量。</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>桌位快速控制</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>直接送餐註記</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>餐點顯示名稱替換設定</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
@@ -687,7 +687,7 @@ function fnScrollToTop(){
                 <div class="detail-desc">本系統由第一線餐飲人員實際參與規劃開發，專注於餐飲現場的營運需求，採用店內本地端架構，並透過模組化功能與彈性設備配置，降低小型餐飲店的導入門檻。<br>在費用規劃上，我們將硬體設備、軟體授權與技術支援分開計費，讓店家依照實際需求選擇所需項目。技術支援採按需求付費，不強制綑綁於軟體授權中，讓店家不必為未使用的支援服務支付固定費用。<br>我們不追求花俏的廣告行銷，而是希望將資源投入系統本身，以合理、透明的收費方式，讓更多餐飲業夥伴能以可負擔的成本，逐步建立整合式點餐與出餐流程。</div>
             </div>
             <div class="detail-item">
-                <div class="detail-title">基礎版真的可以「永久免費」嗎？有沒有隱藏陷阱？</div>
+                <div class="detail-title">基礎版免授權費，還有哪些費用？</div>
                 <div class="detail-desc">基礎版免收軟體授權使用費，新設置店家可免費體驗完整版功能 30 天。首次初始化設定費為 $6,000，硬體及額外技術支援另計；後續更新、錯誤修正與安全性更新不包含在基礎版授權費內。</div>
             </div>
             <div class="detail-item">
@@ -716,7 +716,7 @@ function fnScrollToTop(){
             </div>
             <div class="detail-item">
                 <div class="detail-title">如果某些食材或餐點賣完了，怎麼防止客人在手機或自助機一直點到？</div>
-                <div class="detail-desc">完整版具備「限制數量或完售即時控管」功能。當您在 POS 或 KDS 按下一鍵完售或設定數量歸零時，自助點餐機（Kiosk）會即時同步完售狀態(手機點餐於新訂單送出時會阻擋內含已完售品項之訂單)，避免超賣。</div>
+                <div class="detail-desc">完整版具備「即時庫存控管」功能。當您在 POS 或 KDS 按下一鍵完售或設定數量歸零時，自助點餐機（Kiosk）會即時同步完售狀態；手機點餐則會在送出新訂單時，阻擋包含已完售品項的訂單，避免超賣。</div>
             </div>
             <div class="detail-item">
                 <div class="detail-title">手機掃碼點餐（QR Code）安全嗎？會不會被外面的惡意人士亂點？</div>
