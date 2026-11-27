@@ -13,6 +13,8 @@
     <title>EYESHOT 餐飲 POSKit — 方案與價格</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+		<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.min.js "></script>
+		<link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css " rel="stylesheet">
     <style>
         :root {
             --bg-color: #FAFAFC;
@@ -390,7 +392,7 @@
             color: var(--text-sub);
             line-height:1;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .hero h1 { font-size: 2rem; }
             .pricing-grid { grid-template-columns: 1fr; }
             .col-feature { width: 40%; }
@@ -440,13 +442,14 @@ function fnScrollToTop(){
             <a href="#" class="brand">
                 <img src="logo.png" alt="Logo"> 餐飲 POSKit
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links p-0 m-0">
                 <li><a href="#pricing">方案價格</a></li>
                 <li><a href="#comparison">功能比較</a></li>
                 <li><a href="#equipmentNeeds">設備需求</a></li>
                 <li><a href="#fees">設定與維護</a></li>
                 <li><a href="#details">問與答</a></li>
                 <li><a href="#authps">授權與服務</a></li>
+                <li><a href="#successStories">合作店家</a></li>
             </ul>
             <div class="nav-btn" onclick="document.querySelector('#navList').classList.toggle('d-none');" style="display:none;cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
@@ -579,12 +582,14 @@ function fnScrollToTop(){
                 <tr><td>輪播廣告</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>顯示點餐條碼<div class=detailps>可依設定更新限時條碼，逾期後失效，降低惡意下單風險</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>售完品項聯動顯示</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>滿單狀態顯示<div class=detailps>當達到滿單狀態，會於畫面顯示預估時間，並出現暫停接單訊息(如有開啟排隊候餐，則出現繁忙需等待訊息)</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>輪播設備數量</td><td class="col-plan yes"><div class=detailps>限1台</div></td><td class="col-plan yes"><div class=detailps>預設2台<div style=font-weight:lighter>(可額外授權增加數量)</div></div></td></tr>
 
                 <tr class="cate-row"><td colspan="3">六、 自助點餐機 (Kiosk)</td></tr>
                 <tr><td>基本點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>滿單管控<div class=detailps>可以時間、時段設置訂單滿單總額，當該單位時間內未製餐之訂單(餐點)達到滿單金額，則限制新訂單送出</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>排隊候餐<div class=detailps>開啟此功能時，當達到滿單狀態仍可繼續點餐，系統會估算出餐時間，由顧客確認同意等候，減少店家與顧客間的溝通成本</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>自助點餐機設備數量</td><td class="col-plan no"><div class=detailps>-</div></td><td class="col-plan yes"><div class=detailps>預設1台<div style=font-weight:lighter>(可額外授權增加數量)</div></div></td></tr>
 
@@ -593,6 +598,7 @@ function fnScrollToTop(){
                 <tr><td>預約點餐功能</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>掃描條碼點餐(QR Code)<div class=detailps>支援無時效條碼、限時條碼及即時產生之條碼</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>滿單管控<div class=detailps>可以時間、時段設置訂單滿單總額，當該單位時間內未製餐之訂單(餐點)達到滿單金額，則限制新訂單送出</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
+                <tr><td>排隊候餐<div class=detailps>開啟此功能時，當達到滿單狀態仍可繼續點餐，系統會估算出餐時間，由顧客確認同意等候，減少店家與顧客間的溝通成本</div></td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>行動支付串接</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>會員登入(可 LINE Login)</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
                 <tr><td>會員手機簡訊認證</td><td class="col-plan no">-</td><td class="col-plan yes">✓</td></tr>
@@ -786,6 +792,13 @@ function fnScrollToTop(){
 
 <li>完整授權內容與雙方服務約定，將於正式合作時另行確認。</li>
 </ul>
+        </div>
+        </section>
+     <section class="details-section" id="successStories">
+        <div class="section-header">合作店家</div>
+
+        <div class="detail-group">
+        	<div class="fs-4 rounded fw-bold text-center col-4 border lh-1 p-3"><a class="text-reset text-decoration-none" href="https://maimianlang.myqnapcloud.com/"><img style=max-width:50% src=pic/logoMaimian.png><div>麥麵郎排骨酥麵</div></a><a href="https://maps.app.goo.gl/RgJzSPGo8nDoJqSs8"><span class="badge bg-primary fs-6 p-1 m-1">示範店</span></a></div>
         </div>
         </section>
     <!-- 頁尾 -->
